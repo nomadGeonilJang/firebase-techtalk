@@ -2,12 +2,22 @@ import React, { useRef, useState, useEffect } from 'react';
 import firebase from "firebase";
 
 import myFirebase from 'firebase/myfirebase';
+import Post from 'components/Post';
 type HomeProps = {
   userObj:firebase.User | null
 }
+
+export type PostType ={
+  id:string;
+  text:string;
+  creatorId:string;
+  createdAt:number;
+}
+
+
 function Home( { userObj }:HomeProps ) {
 
-  const [ posts, setPosts ] = useState<any>( [] );
+  const [ posts, setPosts ] = useState<PostType[]>( [] );
   const postRef = useRef<HTMLTextAreaElement>( null );
   const formRef = useRef<HTMLFormElement>( null );
 
@@ -22,15 +32,6 @@ function Home( { userObj }:HomeProps ) {
   };
 
   useEffect( () => {
-    // myFirebase.firestore.collection( "posts" ).get().then( snapshot => {
-    //   snapshot.forEach( doc => {
-    //     const newPost = {
-    //       ...doc.data(),
-    //       id: doc.id
-    //     };
-    //     setPosts( ( prev:any ) => [ newPost, ...prev, ] );
-    //   } );
-    // } );
 
     myFirebase.firestore
       .collection( "posts" )
@@ -39,7 +40,7 @@ function Home( { userObj }:HomeProps ) {
           id: doc.id,
           ...doc.data()
         } ) );
-        setPosts( postList );
+        setPosts( postList as unknown as PostType[] );
       } );
      
   }, [] );
@@ -49,7 +50,7 @@ function Home( { userObj }:HomeProps ) {
         <textarea ref={postRef} cols={30}/>
         <button type="submit">form</button>
       </form>
-      {posts.map( ( item:any ) => <div key={item.id}>{item.text}</div> )}
+      {posts.map( ( post ) => <Post key={post.id} post={post} isOwner={userObj?.uid === post.creatorId} /> )}
     </div>
   );
 }
