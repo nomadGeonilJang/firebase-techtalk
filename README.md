@@ -7,6 +7,8 @@
 6. 이메일 회원가입 로그인 구현 -> 인덱스 디비 사용하여 로그인 유지 시킨다.
 7. firebase.auth().onAuthStateChanged(function(user))가지고 로그인 상태를 확인 할 수 있다.
 8. onSnapshot is kind of listener watch realtime check database changed
+9. make bucket which you put your asset on the internet
+10. fileReader API
 
 # deploy with firebase
 npm install -g firebase-tools
