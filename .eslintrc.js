@@ -35,6 +35,7 @@ module.exports = {
     "space-before-function-paren": [ "error", { "anonymous": "always", "named": "never", "asyncArrow": "always" } ],
     "eqeqeq": [ "error", "always" ],
     "space-infix-ops": "error",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   }
 };
