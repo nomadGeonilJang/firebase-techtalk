@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import firebase from "firebase";
+import { v4 as uuidv4 } from "uuid";
 
 import myFirebase from 'firebase/myfirebase';
 import Post from 'components/Post';
@@ -12,6 +13,7 @@ export type PostType ={
   text:string;
   creatorId:string;
   createdAt:number;
+  attachmentUrl?:string
 }
 
 
@@ -23,14 +25,22 @@ function Home( { userObj }:HomeProps ) {
   const formRef = useRef<HTMLFormElement>( null );
   
 
-  const handlePostUpload = ( e:React.FormEvent ) => {
+  const handlePostUpload = async  ( e:React.FormEvent ) => {
     e.preventDefault();
+
+    const attachmentRef = myFirebase.storage.ref().child( `${userObj?.uid}/${uuidv4()}` );
+    const response = await attachmentRef.putString( attachment, "data_url" ); //put(file) 통째로! or
+    const attachmentUrl =  await response.ref.getDownloadURL(); 
+
+
     myFirebase.firestore.collection( "posts" ).add( {
       text: postRef.current!.value,
       createdAt: Date.now(),
-      creatorId: userObj?.uid
+      creatorId: userObj?.uid,
+      attachmentUrl
     } );
     formRef.current!.reset();
+    setAttachment( "" );
   };
 
   const handleChangeFile = ( e:React.ChangeEvent<HTMLInputElement> ) => {

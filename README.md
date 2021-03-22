@@ -9,6 +9,7 @@
 8. onSnapshot is kind of listener watch realtime check database changed
 9. make bucket which you put your asset on the internet
 10. fileReader API
+11. storage를 사용하려면 레퍼런스 (저장할 공간을 ) 먼저 만들고 그 만든 공간의 메소드를 이용하여 파일을 업로드 진행 한다.
 
 # deploy with firebase
 npm install -g firebase-tools

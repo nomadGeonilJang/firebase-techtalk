@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { PostType } from 'pages/Home';
 import myFirebase from 'firebase/myfirebase';
 
@@ -21,6 +22,7 @@ function Post( { post, isOwner }:PostProps ) {
   const toggleEdit = () => setIsEdit( !isEdit );
 
   const handleEditText = ( e:React.ChangeEvent<HTMLInputElement> ) => setEditPost( e.target.value );
+  
   const handleUpdatePost = ( e:React.FormEvent ) => {
     e.preventDefault();
     myFirebase.firestore.doc( `/posts/${post.id}` ).update( {
@@ -43,7 +45,10 @@ function Post( { post, isOwner }:PostProps ) {
           <button onClick={toggleEdit}>cancel</button>
         </>
       )}
-      { !isEdit && ( <h4>{post.text}</h4> )}
+      { !isEdit && ( <div>
+        {post.attachmentUrl &&  <img src={post.attachmentUrl} alt={"post image"}/>}
+        <h4>{post.text}</h4>
+      </div> )}
       
       {isOwner && (
         <>
