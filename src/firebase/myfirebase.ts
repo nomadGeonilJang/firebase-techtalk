@@ -1,7 +1,9 @@
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 class Firebase{
+  
   private firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -15,11 +17,13 @@ class Firebase{
   firebase = firebase
   auth:firebase.auth.Auth
   firestore:firebase.firestore.Firestore
+  storage:firebase.storage.Storage
 
   constructor(){
     this.firebase.initializeApp( this.firebaseConfig );
     this.auth = this.firebase.auth();
     this.firestore = this.firebase.firestore();
+    this.storage = this.firebase.storage();
   }
 
   
