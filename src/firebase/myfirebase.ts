@@ -12,7 +12,7 @@ class Firebase{
     measurementId: process.env.REACT_APP_MEASUREMENT_ID,
   };
 
-  private firebase = firebase
+  firebase = firebase
   auth:firebase.auth.Auth
 
   constructor(){

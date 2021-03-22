@@ -5,6 +5,7 @@ import Auth from "pages/Auth";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import EditProfile from "pages/EditProfile";
+import Navigation from "components/Navigatiodn";
 
 
 type RouterProps = {
@@ -12,9 +13,9 @@ type RouterProps = {
 }
 
 function Router( { isLoggedIn }:RouterProps ) {
-
   return (
     <HashRouter>
+      {isLoggedIn && <Navigation/>}
       <Switch>
         {isLoggedIn && (
           <>
