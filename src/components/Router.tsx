@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom"; 
 
 import Auth from "pages/Auth";
@@ -7,9 +7,12 @@ import Profile from "pages/Profile";
 import EditProfile from "pages/EditProfile";
 
 
+type RouterProps = {
+    isLoggedIn:boolean
+}
 
-function Router() {
-  const [ isLoggedIn, setIsLoggedIn ] = useState( false );
+function Router( { isLoggedIn }:RouterProps ) {
+
   return (
     <HashRouter>
       <Switch>
