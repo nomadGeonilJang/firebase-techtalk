@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function Navigation() {
+function NavigationBar() {
   return (
     <div>
       <ul>
@@ -12,4 +12,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default NavigationBar;
